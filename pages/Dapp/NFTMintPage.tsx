@@ -8,7 +8,7 @@ import styles from "../../styles/Home.module.css";
 import Image from "next/image";
 import HeaderComponent from "../../components/Header/HeaderComponent";
 import FooterComponent from "../../components/Footer/FooterComponent";
-import bloodred from "../../assets/images/bloodred.jpg";
+import goonsPic from "../../assets/images/goonsPic.jpg";
 import { Accordion } from "flowbite-react";
 //import Rex_logo from '../../assets/images/REX_logo.png'
 import { SwapWidget, darkTheme, lightTheme, Theme } from "@uniswap/widgets";
@@ -57,20 +57,15 @@ const NFTMint = () => {
     <>
       <HeaderComponent></HeaderComponent>
       <main className={styles.main}>
-      <div className="flex flex-row w-screen">
-      <Image
-          className="relative min-w-full float-left elevation-10 z-index-0 sm:clip-path-mypolygon"
-          src={bloodred}
-        ></Image>
-        <div className="flex flex-col sm:content-start absolute z-index-10 justify-self-end justify-right align-right w-screen text-right">
-          <h1 style={{ fontFamily: "Cinzel, serif" }} className="text-center text-5xl text-gray-100 mt-12 mr-5 md:text-5xl pr-5 text-right"> RuneStone </h1>
-          <MintCardComponent></MintCardComponent>
+        <div className="flex flex-row w-screen">
+          <Image
+            className="relative min-w-full float-left elevation-10 z-index-0 sm:clip-path-mypolygon"
+            src={goonsPic}
+          ></Image>
+          <div className="flex flex-col sm:content-start absolute z-index-10 justify-self-end justify-right align-right w-screen text-right">
+            <MintCardComponent></MintCardComponent>
+          </div>
         </div>
-
-      </div>
-      <div className="mt-96 sm:mt-96 md:mt-0 lg:mt-0 flex flex-col align-left z-index-40 text-right md:justify-left">
-      </div>
-      <ClaimComponent></ClaimComponent>
       </main>
 
       <FooterComponent></FooterComponent>

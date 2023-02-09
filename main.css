@@ -1,0 +1,18 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Expletus+Sans&display=swap");
+
+/* can now reference my font */
+body {
+  font-family: 'Merriweather';
+}
+body {
+  font-family: 'Audiowide';
+}
+body {
+  font-family: 'Expletus';
+}
+ {
+  font-family: 'Expletus';
+}

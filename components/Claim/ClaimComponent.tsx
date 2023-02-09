@@ -24,12 +24,158 @@ export default function ClaimComponent() {
   const { library } = context;
   const [uniswaprovider, setuniswapprivder] = useState();
   const [tokenid, settokenid] = useState(Number);
+  const [pendingreflections, setpendingreflections] = useState(Number);
+  const [totaldistributed, settotaldistributed] = useState(Number);
+  const [balance, setbalance] = useState(Number);
+
   if (typeof window !== "undefined") {
     useEffect(() => {
       // Update the document title using the browser API
       ScrollpositionAnimation();
     }, [window.scrollY]);
   }
+
+  useEffect(() => {
+    async function Fetchbalance() {
+      if (!account) {
+        return;
+      }
+
+      try {
+        setLoading(true);
+        const abi = abiObject;
+        const provider = new Web3Provider(
+          library?.provider as ExternalProvider | JsonRpcFetchFunc
+        );
+        const contractaddress = "0xFC2C1EdBc2715590667c7c4BE0563010aBC9E205"; // "clienttokenaddress"
+        const contract = new Contract(contractaddress, abi, provider);
+        const balance = await new contract.balanceOf(account); //.claim(account,amount)
+        const Claimtxid = await balance;
+        const finalbalance = Number(balance);
+        const Fixeddecimals = finalbalance.toFixed(2);
+        const Numberify = Number(Fixeddecimals);
+        setbalance(Numberify);
+        console.log(Numberify);
+
+        return Claimtxid;
+        /////
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    async function PendingReflections() {
+      try {
+        setLoading(true);
+        const abi = abiObject;
+        const provider = new Web3Provider(
+          library?.provider as ExternalProvider | JsonRpcFetchFunc
+        );
+        const contractaddress = "0xFC2C1EdBc2715590667c7c4BE0563010aBC9E205"; // "clienttokenaddress"
+        const contract = new Contract(contractaddress, abi, provider);
+        const rewardToken = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
+        const Reflections = await contract.withdrawableDividendOf(
+          account,
+          rewardToken
+        ); //.claim()
+        //const FinalReflections = BigNumber.from(Reflections)
+        // const test = formatEther(String(Reflections))
+        const finalnumber = Number(Reflections);
+        setpendingreflections(finalnumber);
+        console.log(Reflections);
+
+        return finalnumber;
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    }
+    async function FetchDistributed() {
+      try {
+        setLoading(true);
+        const abi = abiObject;
+        const provider = new Web3Provider(
+          library?.provider as ExternalProvider | JsonRpcFetchFunc
+        );
+        const contractaddress = "0xFC2C1EdBc2715590667c7c4BE0563010aBC9E205"; // "clienttokenaddress"
+        const contract = new Contract(contractaddress, abi, provider);
+        const rewardToken = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
+        const Reflections = await contract.getTotalDividendsDistributed(
+          rewardToken
+        );
+        const finalnumber = Number(Reflections);
+        settotaldistributed(finalnumber);
+
+        return finalnumber;
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+
+    async function scrollpositionAnimationleft() {
+      const targets = document.querySelectorAll(".js-show-on-scroll-left");
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          // Is the element in the viewport?
+          if (entry.isIntersecting) {
+            // Add the fadeIn class:
+            entry.target.classList.add("motion-safe:animate-fadeinleft");
+          } else {
+            // Otherwise remove the fadein class
+            entry.target.classList.remove("motion-safe:animate-fadeinleft");
+          }
+        });
+      });
+      // Loop through each of the target
+      targets.forEach(function (target) {
+        // Hide the element
+        target.classList.add("opacity-0");
+
+        // Add the element to the watcher
+        observer.observe(target);
+      });
+      //ScrollpositionAnimation();
+    }
+    async function scrollpositionAnimationright() {
+      const targets = document.querySelectorAll(".js-show-on-scroll-right");
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          // Is the element in the viewport?
+          if (entry.isIntersecting) {
+            // Add the fadeIn class:
+            entry.target.classList.add("motion-safe:animate-fadeinright");
+          } else {
+            // Otherwise remove the fadein class
+            entry.target.classList.remove("motion-safe:animate-fadeinright");
+          }
+        });
+      });
+      // Loop through each of the target
+      targets.forEach(function (target) {
+        // Hide the element
+        target.classList.add("opacity-0");
+
+        // Add the element to the watcher
+        observer.observe(target);
+      });
+      //ScrollpositionAnimation();
+    }
+    scrollpositionAnimationleft();
+    scrollpositionAnimationright();
+
+    PendingReflections();
+    Fetchbalance();
+    FetchDistributed();
+  }, [account]);
 
   const Claimtoken = useCallback(async () => {
     if (!account) {
@@ -39,6 +185,7 @@ export default function ClaimComponent() {
         timer: 5000,
       });
     }
+    
 
     try {
       setLoading(true);
@@ -127,9 +274,31 @@ export default function ClaimComponent() {
 
   return (
     <>
-      <div className="flex flex-col w-full md:px-20 content-center items-center lg:px-48 xl:px-64 js-show-on-scroll">
+      <div className="flex flex-col w-full content-center items-center px-6 sm:px-10 md:px-20 lg:px-48 xl:px-64 js-show-on-scroll">
+    <table className={'table-auto'}>
+      <div className={'flex flex-row w-full h-fit hover:animate-fadeinleft js-show-on-scroll-left py-4 px-2 my-4 border-2 border-white rounded-2xl'}>
+        <p className={'text-xl text-white mx-10'}>Pending Reflections</p>
+        <p className={'text-xl text-white mx-10'}>$0.002374</p>
+      </div>
+
+      <div className={'flex flex-row w-full h-fit hover:animate-fadeinright js-show-on-scroll-right py-4 px-2 my-4 border-2 border-white rounded-2xl'}>
+        <p className={'text-xl text-white mx-10'}>Total Reflections Distributed</p>
+        <p className={'text-xl text-white mx-10'}>$100,000.4</p>
+      </div>
+
+      <div className={'flex flex-row w-full h-fit hover:animate-fadeinleft js-show-on-scroll-left py-4 px-2 my-4 border-2 border-white rounded-2xl'}>
+        <p className={'text-xl text-white mx-10'}>Market Cap</p>
+        <p className={'text-xl text-white mx-10'}>$10,000</p>
+      </div>
+
+      <div className={'flex flex-row w-full h-fit hover:animate-fadeinright js-show-on-scroll-right py-4 px-2 my-4 border-2 border-white rounded-2xl'}>
+        <p className={'text-xl text-white mx-10'}>HODLER's</p>
+        <p className={'text-xl text-white mx-10'}>151</p>
+      </div>
+      </table>
+
         <h5
-          style={{ fontFamily: "Aquire" }}
+          style={{ fontFamily: "MondayFeelings" }}
           className="text-center mb-2 text-3xl font-bold tracking-tight self-center text-purple-100 dark:text-white"
         >
           Claim ETH Rewards
@@ -138,15 +307,14 @@ export default function ClaimComponent() {
           <Spin indicator={antIcon} className="add-spinner" />
         ) : (
           <>
-            <div className="flex flex-row bg:white w-full content-center items-center max-w-screen">
+            <div className="flex flex-row content-center items-center max-w-screen">
               <button
-                style={{ fontFamily: "Aquire" }}
+                style={{ fontFamily: "BeatWord" }}
                 type="button"
                 onClick={() => Claimtoken()}
-                className="w-full mx-0 self-center content-center tn:mx-0 elevation-10 hover:elevation-50 md:mx-48 h-24 clip-path-mycorners justify-self-center mt-10
-            text-gray-100 bg-purple-700 transition ease-in-out duration-700 hover:bg-purple-800 hover:text-white focus:ring-4
-            focus:ring-blue-300 font-medium rounded-lg text-3xl px-5 py-2.5 mb-6 dark:bg-blue-600 dark:hover:bg-blue-700 
-            focus:outline-none dark:focus:ring-blue-800 text-4xl"
+                className="w-fit mx-0 px-20 md:px-32 self-center content-center tn:mx-0 elevation-10 hover:elevation-50 md:mx-24 h-24
+                 clip-path-mycorners justify-self-center mt-10 text-gray-100 bg-teal-500 hover:bg-blue-900 transition ease-in-out duration-700
+                 text-3xl lg:text-4xl "
               >
                 Claim
               </button>
