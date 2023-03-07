@@ -85,7 +85,7 @@ module.exports = {
         fadeinleft: {
           "0%": {
             opacity: 0,
-            transform: "translateX(-200px)",
+            transform: "translateX(-100px)",
           },
           "100%": {
             opacity: 1,
@@ -95,7 +95,7 @@ module.exports = {
         fadeinright: {
           "0%": {
             opacity: 0,
-            transform: "translateX(200px)",
+            transform: "translateX(100px)",
           },
           "100%": {
             opacity: 1,
@@ -105,15 +105,11 @@ module.exports = {
         scaleintopleft: {
           "0%": {
             transform: "scale(0.3)",
-            //transform: "translateX(400px)",
             opacity: 0,
-            //transform: "translateY(400px)",
           },
           "100%": {
             transform: "scale(1)",
-            //transform: "translateX(0)",
             opacity: 1,
-            //transform: "translateY(0)",
           },
         },
       },

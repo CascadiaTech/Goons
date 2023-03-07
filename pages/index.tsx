@@ -9,6 +9,7 @@ import DualCardComponent from "../components/DualCards/DualCardComponent";
 import ScrollpositionAnimation from "../hooks/OnScroll";
 import { useEffect, useRef, useState } from "react";
 import "@uniswap/widgets/fonts.css";
+import goonsHomepage from "../assets/images/GoonsHomepage.jpg"
 import goonsLogoMobile from "../assets/images/goonsLogoMobile.jpg";
 import { useWeb3React } from "@web3-react/core";
 import ClaimComponent from "../components/Claim/ClaimComponent";
@@ -167,34 +168,28 @@ const Home: NextPage = () => {
   function RenderButtons() {
     setisended(true);
   }
+  
+ // <div className={"mb-10 sm:mb-10 md:mb-10 lg:mb-10 xl:mb-0 flex flex-col"}>
+ // <Image
+ //   className="min-w-0 min-h-0 visible sm:visible md:visible lg:visible xl:min-w-0 xl:min-h-0 xl:invisible"
+ //   src={goonsLogoMobile}
+ // ></Image>
+ // </div>
 
   return (
-    <div className="">
+    <div className="scroll-smooth">
       <main className={styles.main}>
         <header>
           {" "}
           <HeaderComponent></HeaderComponent>
         </header>
-        <div className="video-docker top-0 left-0 h-full justify-center w-full h-full">
-          <video
-            ref={videoRef}
-            className="object-cover min-w-full min-h-full absolute object-cover invisible sm:invisible md:invisible lg:invisible xl:visible"
-            playsInline
-            autoPlay
-            loop
-            muted
+        <div className="flex flex-col px-32 mt-32 justify-center w-full h-full">
+          <Image
+            src={goonsHomepage}
+            className="invisible sm:invisible md:invisible lg:invisible xl:visible"
           >
-            
-              <source src="/goonhomepage.mp4" type="video/mp4"/> Your browser does
-            not support the video tag, update your browser
-          </video>
+           </Image>
         </div>
-        <div className={"mb-10 sm:mb-10 md:mb-10 lg:mb-10 xl:mb-0 flex flex-col"}>
-            <Image
-              className="visible sm:visible md:visible lg:visible xl:invisible"
-              src={goonsLogoMobile}
-            ></Image>
-          </div>
         <div
           style={{
             display: "flex",
@@ -205,7 +200,7 @@ const Home: NextPage = () => {
             "mx-auto self-center content-center items-center justify-center"
           }
         >
-          <p className={"my-0 sm:my-0 md:my-0 lg:my-0 xl:my-44"}></p>
+          <p className={"my-0 sm:my-0 md:my-0 lg:my-0 xl:my-10"}></p>
          
           <div
             className={"flex flex-row w-screen object-center justify-center"}
