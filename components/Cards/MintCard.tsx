@@ -2,7 +2,7 @@ import "tailwindcss-elevation";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ScrollpositionAnimation from "../../hooks/OnScroll";
 import Swal from "sweetalert2";
-import { abiObject } from "../../contracts/abi.mjs";
+import { abiObject } from "../../contracts/abi/abi.mjs";
 import {
   ExternalProvider,
   JsonRpcFetchFunc,

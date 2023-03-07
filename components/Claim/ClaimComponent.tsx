@@ -9,7 +9,7 @@ import {
   Web3Provider,
 } from "@ethersproject/providers";
 import { Contract } from "@ethersproject/contracts";
-import { abiObject } from "../../contracts/abi.mjs";
+import { abiObject } from "../../contracts/abi/abi.mjs";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import ScrollpositionAnimation from "../../hooks/OnScroll";

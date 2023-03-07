@@ -13,6 +13,7 @@ import goonsLogoMobile from "../assets/images/goonsLogoMobile.jpg";
 import { useWeb3React } from "@web3-react/core";
 import ClaimComponent from "../components/Claim/ClaimComponent";
 import MintCardComponent from "../components/Cards/MintCard";
+import DropdownComponent from "../components/Dropdown/dropdownmenu";
 const Home: NextPage = () => {
   const { account, chainId, active } = useWeb3React();
   const showConnectAWallet = Boolean(!account);
@@ -238,6 +239,7 @@ const Home: NextPage = () => {
             >
               Token
             </button>
+           
           </div>
         </div>
 
@@ -297,6 +299,7 @@ const Home: NextPage = () => {
       <div className={'justify-center flex flex-col'}>
         <ClaimComponent></ClaimComponent>
       </div>
+      <DropdownComponent></DropdownComponent>
       </main>
       <FooterComponent></FooterComponent>
     </div>
