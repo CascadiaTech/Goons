@@ -275,10 +275,10 @@ export default function ClaimComponent() {
   return (
     <>
       <div className="flex flex-col w-full content-center items-center px-6 sm:px-10 md:px-20 lg:px-48 xl:px-64 js-show-on-scroll">
-    <table className={'table-auto'}>
+    <table className={'table-fixed'}>
       <div className={'flex flex-row w-full h-fit hover:animate-fadeinleft js-show-on-scroll-left py-4 px-2 my-4 border-2 border-white rounded-2xl'}>
-        <p className={'text-xl text-white mx-10'}>Pending Reflections</p>
-        <p className={'text-xl text-white mx-10'}>$0.002374</p>
+        <p className={'text-xl text-white justify-left'}>Pending Reflections</p>
+        <p className={'text-xl text-white justify-right object-right position-right'}>$0.002374</p>
       </div>
 
       <div className={'flex flex-row w-full h-fit hover:animate-fadeinright js-show-on-scroll-right py-4 px-2 my-4 border-2 border-white rounded-2xl'}>
