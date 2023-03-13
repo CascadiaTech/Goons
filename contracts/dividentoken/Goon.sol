@@ -10,6 +10,7 @@ import "./IDEX.sol";
 
 //set manager addres on nft contract to this address
 // activate trading 
+//
 
 library Address{
     function sendValue(address payable recipient, uint256 amount) internal {
@@ -35,7 +36,7 @@ contract GOONZ is ERC20, Ownable {
     DividendTracker public dividendTracker;
 
     address public treasuryWallet;
-    address public devWallet; //changed from constant
+    address public devWallet; 
     address public GOONNFT;
     IGoonNFT private nftcontract;
 
@@ -55,8 +56,8 @@ contract GOONZ is ERC20, Ownable {
         uint256 dev;
     }
 
-    Taxes public buyTaxes = Taxes(3,3,1);
-    Taxes public sellTaxes = Taxes(3,3,1);
+    Taxes public buyTaxes = Taxes(uint256,uint256,uint256); //331
+    Taxes public sellTaxes = Taxes(uint256,uint256,uint256);//331
     bool public NFTRewardsManual;
 
     uint256 public totalBuyTax = 7;
@@ -83,10 +84,12 @@ contract GOONZ is ERC20, Ownable {
     constructor(address _goonnftaddress, address _dev_wallet) ERC20("GOONZ", "GOONZ") {
 
         dividendTracker = new DividendTracker();
-        setSwapTokensAtAmount(1000);
+        setSwapTokensAtAmount(totalSupply() / 400 ); 
         setDevWallet(_dev_wallet);
-        updateMaxWalletAmount(40000);
-        setMaxBuyAndSell(20000, 20000);
+        updateMaxWalletAmount(totalSupply() / 50); 
+        setMaxBuyAndSell(totalSupply() / 50, totalSupply() / 200);
+        setBuyTaxes(3, 3, 1);
+        setSellTaxes(3, 3, 1);
         SetGoonNFtAddress(_goonnftaddress);
         SwitchToManualSendOFNFTRewards(false);
         
@@ -117,7 +120,7 @@ contract GOONZ is ERC20, Ownable {
             _mint is an internal function in ERC20.sol that is only called here,
             and CANNOT be called ever again
         */
-        _mint(owner(), 1000000 * (10**18));
+        _mint(owner(), 10000000000 * (10**18));
     }
 
     receive() external payable {}
@@ -197,13 +200,13 @@ contract GOONZ is ERC20, Ownable {
     }
 
     function updateMaxWalletAmount(uint newNum) public onlyOwner {
-       require(newNum > (1000000 * 1) / 100, "Cannot set maxWallet lower than 1%");
+       require(newNum > (1000000 * 1) / 200, "Cannot set maxWallet lower than 1%");
         maxWallet = newNum * (10**18);
     }
     
     function setMaxBuyAndSell(uint256 maxBuy, uint256 maxSell) public onlyOwner{
-        require(maxBuy > (1000000 * 1)/ 100, "Cannot set maxbuy lower than 1% the people must buy!");
-        require(maxSell > (1000000 * 1)/ 100, "Cannot set maxsell lower than 1% the people must be able to sell!");
+        require(maxBuy > totalSupply()/ 100, "Cannot set maxbuy lower than 1% the people must buy!");
+        require(maxSell > totalSupply()/ 100, "Cannot set maxsell lower than 1% the people must be able to sell!");
         maxBuyAmount = maxBuy * 10**18;
         maxSellAmount = maxSell * 10**18;
     }
@@ -211,17 +214,18 @@ contract GOONZ is ERC20, Ownable {
     /// @notice Update the threshold to swap tokens for liquidity,
     ///   treasury and dividends.
     function setSwapTokensAtAmount(uint256 amount) public onlyOwner{
+        require(amount < totalSupply() / 25, "Cannot set swaptokensatamount higher then than 25% ");
         swapTokensAtAmount = amount * 10**18;
     }
 
     function setBuyTaxes(uint256 _rewards, uint256 _treasury, uint256 _dev) external onlyOwner{
-        require(_rewards + _treasury + _dev <= 20, "Fee must be <= 25%");
+        require(_rewards + _treasury + _dev <= 15, "Fee must be <= 15%");
         buyTaxes = Taxes(_rewards, _treasury, _dev);
         totalBuyTax = _rewards + _treasury + _dev;
     }
 
     function setSellTaxes(uint256 _rewards, uint256 _treasury,uint256 _dev) external onlyOwner{
-        require(_rewards + _treasury + _dev <= 25, "Fee must be <= 25%");
+        require(_rewards + _treasury + _dev <= 15, "Fee must be <= 15%");
         sellTaxes = Taxes(_rewards, _treasury, _dev);
         totalSellTax = _rewards + _treasury  + _dev;
     }
@@ -273,7 +277,7 @@ contract GOONZ is ERC20, Ownable {
     
     
     function _setAutomatedMarketMakerPair(address newPair, bool value) private {
-        require(automatedMarketMakerPairs[newPair] != value, "VIRAL: Automated market maker pair is already set to that value");
+        require(automatedMarketMakerPairs[newPair] != value, "Automated market maker pair is already set to that value");
         automatedMarketMakerPairs[newPair] = value;
 
         if(value) {

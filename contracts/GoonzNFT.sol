@@ -16,7 +16,7 @@ pragma solidity =0.8.17;
 
     Shoutout to VB if you like the nfts, made with love in the dark forest that is our home. 
 
-*/
+*/// 0.04 price
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
@@ -65,9 +65,9 @@ contract OfficialGinuNFCT is ERC721, Ownable {
     bool private _locked = false; // for re-entrancy guard
 
   //Constants
-    uint256 private constant PUB_MAX_PER_WALLET = 10; // 3/wallet (uses < to save gas)
+    uint256 private constant PUB_MAX_PER_WALLET = 20; // 3/wallet (uses < to save gas)
   // Total supply
-    uint256 public constant MAX_SUPPLY = 2000;
+    uint256 public constant MAX_SUPPLY = 1069;
 
     //events
     event ClaimedRewards(uint256 tokenid, address to);
