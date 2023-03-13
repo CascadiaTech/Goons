@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import ScrollpositionAnimation from "../../hooks/OnScroll";
 import Swal from "sweetalert2";
-import { NFTABIObject } from "../../contracts/abi/NftAbi.mjs";
+import { NFTABIObject } from "../../contracts/NftAbi.mjs";
 import {
   ExternalProvider,
   JsonRpcFetchFunc,
