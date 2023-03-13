@@ -62,6 +62,7 @@ module.exports = {
       },
       animation: {
         fadeIn: "fadeIn 2s ease-in forwards",
+        fadeOut: "fadeIn 2s ease-in forwards",
         fadeindown: "fadeindown 1s ease-out forwards",
         fadeinleft: "fadeinleft 1s ease-out forwards",
         fadeinright: "fadeinright 1s ease-out forwards",
@@ -71,6 +72,10 @@ module.exports = {
         fadeIn: {
           "0%": { opacity: 0 },
           "100%": { opacity: 1 },
+        },
+        fadeOut: {
+          "0%": { opacity: 1 },
+          "100%": { opacity: 0 },
         },
         fadeindown: {
           "0%": {

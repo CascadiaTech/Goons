@@ -1,8 +1,14 @@
 import "tailwindcss-elevation";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import ScrollpositionAnimation from "../../hooks/OnScroll";
 import Swal from "sweetalert2";
-import { abiObject } from "../../contracts/abi/abi.mjs";
+import { NFTABIObject } from "../../contracts/abi/NftAbi.mjs";
 import {
   ExternalProvider,
   JsonRpcFetchFunc,
@@ -35,7 +41,6 @@ export default function MintCardComponent() {
     }, [window.scrollY]);
   }
 
-
   useEffect(() => {
     async function FetchtotalSupply() {
       try {
@@ -43,8 +48,8 @@ export default function MintCardComponent() {
         const provider = new Web3Provider(
           library?.provider as ExternalProvider | JsonRpcFetchFunc
         );
-        const NFTabi = abiObject;
-        const contractaddress = "0xC1948D3FECaF1B33bB5b1bff22f944Cdc595C218";
+        const NFTabi = NFTABIObject;
+        const contractaddress = "0x584EcD04eD498fD3afbcA7e233927D0D75a5EAe1";
         const contract = new Contract(contractaddress, NFTabi, provider);
         const Totalminted = await contract.totalSupply();
         const FinalResult = Number(Totalminted);
@@ -63,14 +68,15 @@ export default function MintCardComponent() {
         const provider = new Web3Provider(
           library?.provider as ExternalProvider | JsonRpcFetchFunc
         );
-        const NFTabi = abiObject;
-        const contractaddress = "0xC1948D3FECaF1B33bB5b1bff22f944Cdc595C218";
+        const NFTabi = NFTABIObject;
+        const contractaddress = "0x584EcD04eD498fD3afbcA7e233927D0D75a5EAe1";
         const contract = new Contract(contractaddress, NFTabi, provider);
         const Mintprice = await contract.PUB_MINT_PRICE();
         const MintPriceformatted = formatEther(Mintprice);
         const FinalResult = Number(MintPriceformatted);
         const PublicMintPrice = FinalResult;
         setpubmintprice(PublicMintPrice);
+        console.log(PublicMintPrice);
         return PublicMintPrice;
       } catch (error) {
         console.log(error);
@@ -84,8 +90,8 @@ export default function MintCardComponent() {
         const provider = new Web3Provider(
           library?.provider as ExternalProvider | JsonRpcFetchFunc
         );
-        const NFTabi = abiObject;
-        const contractaddress = "0xC1948D3FECaF1B33bB5b1bff22f944Cdc595C218";
+        const NFTabi = NFTABIObject;
+        const contractaddress = "0x584EcD04eD498fD3afbcA7e233927D0D75a5EAe1";
         const contract = new Contract(contractaddress, NFTabi, provider);
         const Mintactive = await contract.pubMintActive();
         setpubmintactive(Mintactive);
@@ -117,16 +123,16 @@ export default function MintCardComponent() {
 
     try {
       setLoading(true);
-      const data = abiObject;
+      const data = NFTABIObject;
       const abi = data;
-      const contractaddress = "0xC1948D3FECaF1B33bB5b1bff22f944Cdc595C218"; // "clienttokenaddress"
+      const contractaddress = "0x584EcD04eD498fD3afbcA7e233927D0D75a5EAe1"; // "clienttokenaddress"
       const provider = new Web3Provider(
         library?.provider as ExternalProvider | JsonRpcFetchFunc
       );
       //const provider = getDefaultProvider()
       const signer = provider.getSigner();
       const contract = new Contract(contractaddress, abi, signer);
-      const ethervalue = quantity * 0.05;
+      const ethervalue = quantity * 0;
       const etherstringvalue = JSON.stringify(ethervalue);
       const MintNFT = await contract.publicMint(quantity, {
         value: parseEther(etherstringvalue),
@@ -145,16 +151,17 @@ export default function MintCardComponent() {
     } finally {
       setLoading(false);
     }
+    console.log(Contract);
   }, [account, library?.provider, quantity]);
 
   //md:clip-path-clipsides border-t-4 border-b-4
   return (
     <div className="flex flex-col content-center items-center text-center mx-auto justify-center">
       <h5
-        style={{ fontFamily: "BeatWord" }}
-        className="text-center mt-12 text-4xl lg:text-5xl mb:mb-2 font-bold tracking-tight text-gray-100 dark:text-white"
+        style={{ fontFamily: "PaintDrops" }}
+        className="text-center mt-12 text-4xl lg:text-5xl mb:mb-2 font-bold tracking-tight text-red-600 dark:text-white"
       >
-        Goons Squad NFT Collection
+        Goonz Squad NFT Collection
       </h5>
       {loading ? (
         <div className="content-center items-center">
@@ -165,24 +172,17 @@ export default function MintCardComponent() {
           {" "}
           <button
             onClick={() => handleMint()}
-            style={{ fontFamily: "Aquire" }}
+            style={{ fontFamily: "PaintDrops" }}
             type="button"
             className="w-screen mb-12 justify-center elevation-10 align-center hover:elevation-50 md:w-96 h-24 justify-self-center mt-10
-          text-gray-100 bg-purple-700 transition ease-in-out duration-700 hover:scale-105 focus:ring-4
-          focus:ring-blue-300 font-medium rounded-xl px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-blue-700 
-          focus:outline-none dark:focus:ring-blue-800 text-4xl"
+          text-gray-900 bg-red-600 transition ease-in-out duration-700 hover:scale-105 focus:ring-4
+          focus:ring-black font-medium rounded-xl px-5 py-2.5 text-4xl"
           >
             Mint
           </button>
         </>
-      )}
-
-        {" "}
-        <p className={'text-white my-4 px-4'} style={{ fontFamily: "Aquire" }}>
-          Select The Amount Of NFT's You Would Like To Mint
-        </p>
-
-      <div style={{ fontFamily: "Aquire" }} className="text-white mb-2">
+      )}{" "}
+      <div style={{ fontFamily: "Aquire" }} className="text-black mb-2">
         {quantity} NFT's
       </div>
       <label
@@ -194,18 +194,55 @@ export default function MintCardComponent() {
         id="minmax-range"
         type="range"
         min="1"
-        max="10"
+        max="20"
         value={quantity}
-        className="w-1/2 h-2 bg-teal-400 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+        className="w-1/2 h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer"
       />
-
       <p
-        style={{ fontFamily: "Aquire" }}
-        className="mt-4 text-white text-center text-2xl"
+        className={"text-black text-3xl my-4 px-4"}
+        style={{ fontFamily: "PaintDrops" }}
+      >
+        Select The Amount Of NFT's You Would Like To Mint
+      </p>
+      <p
+        style={{ fontFamily: "PaintDrops" }}
+        className="mt-4 text-black text-center text-3xl"
       >
         {" "}
-        Price: 0.05 ETH per NFT
+        Price: {pubmintprice} ETH
       </p>
+      <p
+        style={{ fontFamily: "PaintDrops" }}
+        className="mt-4 text-black text-center text-3xl"
+      >
+        {" "}
+        Total Amount of NFT's Sold: <br /> {totalSupply} NFT's
+      </p>
+      <p className={"my-10"}></p>
     </div>
   );
 }
+
+//<h5
+//style={{ fontFamily: "MondayFeelings" }}
+//className="text-center mb-2 text-3xl font-bold tracking-tight self-center text-gray-800 dark:text-gray-800"
+//>
+//Claim ETH Rewards
+//</h5>
+//{loading ? (
+//<Spin indicator={antIcon} className="add-spinner" />
+//) : (
+//<>
+//  <div className="flex flex-row content-center items-center max-w-screen">
+//    <button
+//      style={{ fontFamily: "PaintDrops" }}
+//      type="button"
+//      className="w-fit mx-0 px-20 md:px-32 self-center content-center tn:mx-0 elevation-10 hover:elevation-50 md:mx-24 h-24
+//         clip-path-mycorners justify-self-center mt-10 text-gray-800 bg-red-600 hover:bg-red-400 transition ease-in-out duration-700
+//         text-3xl lg:text-4xl "
+//    >
+//      Claim
+//    </button>
+//  </div>
+//</>
+//)}

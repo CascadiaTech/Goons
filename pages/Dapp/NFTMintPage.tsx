@@ -2,13 +2,14 @@ import "tailwindcss-elevation";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useWeb3React } from "@web3-react/core";
 import { Spin } from "antd";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Swal from "sweetalert2";
 import styles from "../../styles/Home.module.css";
 import Image from "next/image";
 import HeaderComponent from "../../components/Header/HeaderComponent";
 import FooterComponent from "../../components/Footer/FooterComponent";
 import goonsPic from "../../assets/images/goonsPic.jpg";
+import goonsPicMobile from "../../assets/images/goonsPicMobile.jpg";
 import { Accordion } from "flowbite-react";
 //import Rex_logo from '../../assets/images/REX_logo.png'
 import { SwapWidget, darkTheme, lightTheme, Theme } from "@uniswap/widgets";
@@ -20,8 +21,10 @@ import {
   Web3Provider,
 } from "@ethersproject/providers";
 import Link from "next/link";
+import { NFTABIObject } from "../../contracts/abi/NftAbi.mjs";
 import MintCardComponent from "../../components/Cards/MintCard";
 import ClaimComponent from "../../components/Claim/ClaimComponent";
+import { Contract } from "@ethersproject/contracts";
 //const mySafeHTML = DOMPurify.sanitize(myHTML)
 
 const NFTMint = () => {
@@ -34,7 +37,46 @@ const NFTMint = () => {
   const context = useWeb3React();
   const { library } = context;
   const [uniswaprovider, setuniswapprivder] = useState();
-  const Runeaddress = "0xc68a4c68f17fed266a5e39e7140650acadfe78f8";
+  const [claim, setcanclaim] = useState(Boolean);
+  const [tokenid, settokenid] = useState(Number);
+
+  const Claimtoken = useCallback(async () => {
+    if (!account) {
+      Swal.fire({
+        icon: "error",
+        title: "Connect Your Wallet To Mint, and Enter A Mint Quantity",
+        timer: 5000,
+      });
+    }
+
+    try {
+      setLoading(true);
+      const data = NFTABIObject;
+      const abi = data;
+      const contractaddress = "0xC1948D3FECaF1B33bB5b1bff22f944Cdc595C218"; // "clienttokenaddress"
+      const provider = new Web3Provider(
+        library?.provider as ExternalProvider | JsonRpcFetchFunc
+      );
+      //const provider = getDefaultProvider()
+      const signer = provider.getSigner();
+      const contract = new Contract(contractaddress, abi, signer);
+      console.log(contract);
+      const ClaimTokens = await contract.ClaimTokens(tokenid); //.claim()
+      const signtransaction = await signer.signTransaction(ClaimTokens);
+      const Claimtxid = await signtransaction;
+      Swal.fire({
+        icon: "success",
+        title: "Congratulations you have Claimed all of your rewards",
+        text: "Go see them in your wallet, and stick around for the next drop",
+      });
+      return Claimtxid;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [account, library?.provider, claim]);
+
   useEffect(() => {
     async function setProvider() {
       if (account) {
@@ -46,8 +88,52 @@ const NFTMint = () => {
         return;
       }
     }
+
+    async function CanClaim() {
+      if (!account) {
+        console.log({
+          message: "Hold On there Partner, there seems to be an Account err!",
+        });
+        return;
+      }
+      try {
+        //setLoading(true)
+        const provider = new Web3Provider(
+          library?.provider as ExternalProvider | JsonRpcFetchFunc
+        );
+        const abi = NFTABIObject;
+        const contractaddress = "0xC1948D3FECaF1B33bB5b1bff22f944Cdc595C218";
+        const contract = new Contract(contractaddress, abi, provider);
+        //const FinalResult = await UserTokenBalance.toString()
+        if (!account) {
+          return Swal.fire({
+            icon: "error",
+            title: "Connect your wallet to claim",
+            text: "you must connect your wallet to claim",
+          });
+        } else {
+          const usersclaimperiod = await contract.NFTSPeriodId(account);
+          const currentperiod = await contract.currentRewardPeriodId();
+          (await usersclaimperiod) && (await currentperiod);
+          console.log(usersclaimperiod);
+          console.log(currentperiod);
+          if (usersclaimperiod <= currentperiod) {
+            setcanclaim(true);
+          } else {
+            setcanclaim(false);
+          }
+          return currentperiod;
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        console.log(claim);
+      }
+    }
+    CanClaim();
     setProvider().then((result) => setuniswapprivder(result as any));
   }, [account]);
+
 
   const jsonRpcUrlMap = {
     1: ["https://mainnet.infura.io/v3/7724cb4383a249dfb4a847c90954b901"],
@@ -57,12 +143,14 @@ const NFTMint = () => {
     <>
       <HeaderComponent></HeaderComponent>
       <main className={styles.main}>
-        <div className="flex flex-row w-screen">
+        <div className="flex flex-col">
+          <div className={'flex flex-col mt-12 justify-center'}>
           <Image
-            className="relative min-w-full float-left elevation-10 z-index-0 sm:clip-path-mypolygon"
+            className="flex flex-col px-2 mt-32 justify-center h-96 w-96 md:w-full md:h-full"
             src={goonsPic}
           ></Image>
-          <div className="flex flex-col sm:content-start absolute z-index-10 justify-self-end justify-right align-right w-screen text-right">
+          </div>
+          <div className="flex flex-col sm:content-start justify-self-end w-screen text-right">
             <MintCardComponent></MintCardComponent>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { useWeb3React } from "@web3-react/core";
 import Swal from "sweetalert2";
 import { Accordion } from "flowbite-react";
 import { useCallback, useEffect, useState } from "react";
+import Web3 from "web3";
 import {
   ExternalProvider,
   JsonRpcFetchFunc,
@@ -10,6 +11,7 @@ import {
 } from "@ethersproject/providers";
 import { Contract } from "@ethersproject/contracts";
 import { abiObject } from "../../contracts/abi/abi.mjs";
+import { Web3ReactProvider } from "@web3-react/core";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import ScrollpositionAnimation from "../../hooks/OnScroll";
@@ -27,6 +29,10 @@ export default function ClaimComponent() {
   const [pendingreflections, setpendingreflections] = useState(Number);
   const [totaldistributed, settotaldistributed] = useState(Number);
   const [balance, setbalance] = useState(Number);
+  const [EthPrice, setEthPrice] = useState(Number);
+  const [holdersCount, setholdersCount] = useState(Number);
+  const [marketCap, setmarketCap] = useState(Number);
+  //const MarketCap = [(JpegPrice / EthPrice) * 10000000] // essentially jpegusd price divided by total supply
 
   if (typeof window !== "undefined") {
     useEffect(() => {
@@ -67,6 +73,116 @@ export default function ClaimComponent() {
       }
     }
 
+    async function FetchTestyCurrentTokenPrice() {
+      if (showConnectAWallet) {
+        console.log({
+          message: "Hold On there Partner, there seems to be an Account err!",
+        });
+        return;
+      }
+
+      try {
+        setLoading(true);
+        const response = await fetch(
+          "https://api.etherscan.io/api?module=contract&action=getabi&address=0x83e9f223e1edb3486f876ee888d76bfba26c475a&apikey=432BW4Y2JX817J6CJAWGHAFTXQNFVXRU2Q"
+        ); // Api Key also the pair contract
+
+        const data = await response.json();
+        const abi = data.result;
+        console.log(abi);
+        const provider = new Web3Provider(
+          library?.provider as ExternalProvider | JsonRpcFetchFunc
+        );
+        const contractaddress = "0x83e9f223e1edb3486f876ee888d76bfba26c475a"; // need uniswapv2pair
+        const contract = new Contract(contractaddress, abi, provider);
+        const Reserves = await contract.getReserves();
+        const JpegReserveA = await Reserves.reserve0;
+        const DisplayJpegReserves = JpegReserveA;
+        console.log(DisplayJpegReserves);
+        return DisplayJpegReserves;
+      } catch (error) {
+        console.log(error);
+      } finally {
+      }
+    }
+    async function FetchMrTestyEthprice() {
+      if (showConnectAWallet) {
+        console.log({
+          message: "Hold On there Partner, there seems to be an Account err!",
+        });
+        return;
+      }
+
+      try {
+        setLoading(true);
+        const response = await fetch(
+          "https://api.ethplorer.io/getTokenInfo/0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9?apiKey=EK-9PHXj-P2uJWQm-fmJ3A"
+        );
+
+        const data = await response.json();
+        const ethPrice = data.price.rate;
+        console.log(ethPrice);
+        setEthPrice(ethPrice);
+      } catch (error) {
+        console.log(error);
+      } finally {
+      }
+    }
+
+    FetchMrTestyEthprice();
+
+    async function FetchholdersCount() {
+      if (showConnectAWallet) {
+        console.log({
+          message: "Hold On there Partner, there seems to be an Account err!",
+        });
+        return;
+      }
+
+      try {
+        setLoading(true);
+        const response = await fetch(
+          "https://api.ethplorer.io/getTokenInfo/0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9?apiKey=EK-9PHXj-P2uJWQm-fmJ3A"
+        );
+
+        const data = await response.json();
+        const holdersCount = data.holdersCount;
+        console.log(holdersCount);
+        setholdersCount(holdersCount);
+      } catch (error) {
+        console.log(error);
+      } finally {
+      }
+    }
+
+    FetchholdersCount();
+
+    async function FetchMarketCap() {
+      if (showConnectAWallet) {
+        console.log({
+          message: "Hold On there Partner, there seems to be an Account err!",
+        });
+        return;
+      }
+
+      try {
+        setLoading(true);
+        const response = await fetch(
+          "https://api.ethplorer.io/getTokenInfo/0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9?apiKey=EK-9PHXj-P2uJWQm-fmJ3A"
+        );
+
+        const data = await response.json();
+        const marketCap = data.price.marketCapUsd;
+        console.log(marketCap);
+        setmarketCap(marketCap);
+      } catch (error) {
+        console.log(error);
+      } finally {
+      }
+    }
+
+    FetchMarketCap();
+
     async function PendingReflections() {
       try {
         setLoading(true);
@@ -74,19 +190,14 @@ export default function ClaimComponent() {
         const provider = new Web3Provider(
           library?.provider as ExternalProvider | JsonRpcFetchFunc
         );
-        const contractaddress = "0xFC2C1EdBc2715590667c7c4BE0563010aBC9E205"; // "clienttokenaddress"
+        const contractaddress = "0x60331f639169dDB9E520b9dc24DE795C15973F38"; // "clienttokenaddress"
         const contract = new Contract(contractaddress, abi, provider);
-        const rewardToken = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
-        const Reflections = await contract.withdrawableDividendOf(
-          account,
-          rewardToken
-        ); //.claim()
-        //const FinalReflections = BigNumber.from(Reflections)
-        // const test = formatEther(String(Reflections))
-        const finalnumber = Number(Reflections);
+        const rewardToken = "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6";
+        const Reflections = await contract.withdrawableDividendOf(account); //.claim()
+        const finalnumber = Web3.utils.fromWei(Reflections.toString());
         setpendingreflections(finalnumber);
         console.log(Reflections);
-
+        console.log(finalnumber);
         return finalnumber;
       } catch (error) {
         console.log(error);
@@ -95,6 +206,13 @@ export default function ClaimComponent() {
         setLoading(false);
       }
     }
+
+    function formattedReflections() {
+      const formattednumber = parseFloat(pendingreflections.toFixed(9));
+      console.log(formattednumber);
+      return formattednumber;
+    }
+
     async function FetchDistributed() {
       try {
         setLoading(true);
@@ -102,16 +220,15 @@ export default function ClaimComponent() {
         const provider = new Web3Provider(
           library?.provider as ExternalProvider | JsonRpcFetchFunc
         );
-        const contractaddress = "0xFC2C1EdBc2715590667c7c4BE0563010aBC9E205"; // "clienttokenaddress"
+        const contractaddress = "0x60331f639169dDB9E520b9dc24DE795C15973F38"; // "clienttokenaddress"
         const contract = new Contract(contractaddress, abi, provider);
-        const rewardToken = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
-        const Reflections = await contract.getTotalDividendsDistributed(
-          rewardToken
-        );
-        const finalnumber = Number(Reflections);
-        settotaldistributed(finalnumber);
+        const rewardToken = "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6";
+        const Reflections = await contract.getTotalDividendsDistributed();
+        const formattedDistributed = Web3.utils.fromWei(Reflections.toString());
+        settotaldistributed(formattedDistributed);
+        console.log(formattedDistributed);
 
-        return finalnumber;
+        return formattedDistributed;
       } catch (error) {
         console.log(error);
         setLoading(false);
@@ -120,6 +237,12 @@ export default function ClaimComponent() {
       }
     }
 
+    // async function formattedDistributed() {
+    //    const totaldistributed = await FetchDistributed();
+    //    const formattedDistributed = parseFloat(totaldistributed.toFixed(18));
+    //    console.log(formattedDistributed);
+    // }
+    // formattedDistributed()
 
     async function scrollpositionAnimationleft() {
       const targets = document.querySelectorAll(".js-show-on-scroll-left");
@@ -169,8 +292,34 @@ export default function ClaimComponent() {
       });
       //ScrollpositionAnimation();
     }
+    async function scrollpositionAnimationfadeOut() {
+      const targets = document.querySelectorAll(".js-show-on-scroll-fadeOut");
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          // Is the element in the viewport?
+          if (entry.isIntersecting) {
+            // Add the fadeIn class:
+            entry.target.classList.add("motion-safe:animate-fadeIn");
+          } else {
+            // Otherwise remove the fadein class
+            entry.target.classList.add("motion-safe:animate-fadeOut");
+          }
+        });
+      });
+      // Loop through each of the target
+      targets.forEach(function (target) {
+        // Hide the element
+        target.classList.add("opacity-0");
+
+        // Add the element to the watcher
+        observer.observe(target);
+      });
+      //ScrollpositionAnimation();
+    }
+
     scrollpositionAnimationleft();
     scrollpositionAnimationright();
+    scrollpositionAnimationfadeOut();
 
     PendingReflections();
     Fetchbalance();
@@ -185,13 +334,12 @@ export default function ClaimComponent() {
         timer: 5000,
       });
     }
-    
 
     try {
       setLoading(true);
       const data = abiObject;
       const abi = data;
-      const contractaddress = "0xC1948D3FECaF1B33bB5b1bff22f944Cdc595C218"; // "clienttokenaddress"
+      const contractaddress = "0x60331f639169dDB9E520b9dc24DE795C15973F38"; // "clienttokenaddress"
       const provider = new Web3Provider(
         library?.provider as ExternalProvider | JsonRpcFetchFunc
       );
@@ -199,7 +347,7 @@ export default function ClaimComponent() {
       const signer = provider.getSigner();
       const contract = new Contract(contractaddress, abi, signer);
       console.log(contract);
-      const ClaimTokens = await contract.ClaimTokens(tokenid); //.claim()
+      const ClaimTokens = await contract.claim(); //.claim()
       const signtransaction = await signer.signTransaction(ClaimTokens);
       const Claimtxid = await signtransaction;
       Swal.fire({
@@ -260,11 +408,11 @@ export default function ClaimComponent() {
           } else {
             setcanclaim(false);
           }
-          return currentperiod;
         }
       } catch (error) {
         console.log(error);
       } finally {
+        let claim = null;
         console.log(claim);
       }
     }
@@ -274,32 +422,54 @@ export default function ClaimComponent() {
 
   return (
     <>
-      <div className="flex flex-col w-full content-center items-center px-6 sm:px-10 md:px-20 lg:px-48 xl:px-64 js-show-on-scroll">
-    <table className={'table-fixed'}>
-      <div className={'flex flex-row w-full h-fit hover:animate-fadeinleft js-show-on-scroll-left py-4 px-2 my-4 border-2 border-white rounded-2xl'}>
-        <p className={'text-xl text-white justify-left'}>Pending Reflections</p>
-        <p className={'text-xl text-white justify-right object-right position-right'}>$0.002374</p>
-      </div>
-
-      <div className={'flex flex-row w-full h-fit hover:animate-fadeinright js-show-on-scroll-right py-4 px-2 my-4 border-2 border-white rounded-2xl'}>
-        <p className={'text-xl text-white mx-10'}>Total Reflections Distributed</p>
-        <p className={'text-xl text-white mx-10'}>$100,000.4</p>
-      </div>
-
-      <div className={'flex flex-row w-full h-fit hover:animate-fadeinleft js-show-on-scroll-left py-4 px-2 my-4 border-2 border-white rounded-2xl'}>
-        <p className={'text-xl text-white mx-10'}>Market Cap</p>
-        <p className={'text-xl text-white mx-10'}>$10,000</p>
-      </div>
-
-      <div className={'flex flex-row w-full h-fit hover:animate-fadeinright js-show-on-scroll-right py-4 px-2 my-4 border-2 border-white rounded-2xl'}>
-        <p className={'text-xl text-white mx-10'}>HODLER's</p>
-        <p className={'text-xl text-white mx-10'}>151</p>
-      </div>
-      </table>
+      <div className="flex flex-col w-full content-center items-center px-6 sm:px-10 md:px-20 lg:px-48 xl:px-64 js-show-on-scroll-fadeOut">
+        <div className="md:grid grid-cols-2 flex flex-col border-2 border-black rounded-xl">
+          <div
+            className={
+              "rounded-xl text-black text-xl px-4 py-2 m-3"
+            }
+          >
+            <p className={"text-xl font-bold text-gray-800"}>
+              Pending Reflections:
+            </p>
+          </div>
+          <div
+            className={
+              "rounded-xl text-black text-xl px-4 py-2 m-3"
+            }
+          >
+            <p className={"text-xl text-gray-800 "}>{pendingreflections}</p>
+          </div>
+          <div
+            className={
+              "rounded-xl text-black  text-xl px-4 py-2 m-3"
+            }
+          >
+            <p className={"text-xl font-bold text-gray-800"}>
+              Total Reflections Distributed
+            </p>
+          </div>
+          <div className={"rounded-xl text-black text-xl px-4 py-2 m-3"}>
+            <p className={"text-xl text-gray-800"}>{totaldistributed}</p>
+          </div>
+          <div className={"rounded-xl text-black text-xl px-4 py-2 m-3"}>
+            <p className={"text-xl font-bold text-gray-800"}>Market Cap</p>
+          </div>
+          <div className={"rounded-xl text-black text-xl px-4 py-2 m-3"}>
+            <p className={"text-xl text-gray-800"}>{marketCap} USD</p>
+          </div>
+          <div className={"rounded-xl text-black text-xl px-4 py-2 m-3"}>
+            <p className={"text-xl font-bold text-gray-800"}>HODLER's:</p>
+          </div>
+          <div className={"rounded-xl text-black text-xl px-4 py-2 m-3"}>
+            <p className={"text-xl text-gray-800"}>{holdersCount}</p>
+          </div>
+        </div>
+        
 
         <h5
-          style={{ fontFamily: "MondayFeelings" }}
-          className="text-center mb-2 text-3xl font-bold tracking-tight self-center text-purple-100 dark:text-white"
+          style={{ fontFamily: "PaintDrops" }}
+          className="text-center mb-2 text-4xl font-bold tracking-tight self-center text-gray-800 dark:text-gray-800"
         >
           Claim ETH Rewards
         </h5>
@@ -309,24 +479,19 @@ export default function ClaimComponent() {
           <>
             <div className="flex flex-row content-center items-center max-w-screen">
               <button
-                style={{ fontFamily: "BeatWord" }}
+                style={{ fontFamily: "PaintDrops" }}
                 type="button"
                 onClick={() => Claimtoken()}
                 className="w-fit mx-0 px-20 md:px-32 self-center content-center tn:mx-0 elevation-10 hover:elevation-50 md:mx-24 h-24
-                 clip-path-mycorners justify-self-center mt-10 text-gray-100 bg-teal-500 hover:bg-blue-900 transition ease-in-out duration-700
+                 clip-path-mycorners justify-self-center mt-10 text-gray-800 bg-red-600 hover:bg-red-400 transition ease-in-out duration-700
                  text-3xl lg:text-4xl "
               >
                 Claim
               </button>
             </div>
-
           </>
         )}
       </div>
-
-      <div className="content-center max-w-screen"></div>
-
-      <div></div>
     </>
   );
 }

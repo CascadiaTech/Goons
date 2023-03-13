@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import "@uniswap/widgets/fonts.css";
 import goonsHomepage from "../assets/images/GoonsHomepage.jpg"
 import goonsLogoMobile from "../assets/images/goonsLogoMobile.jpg";
+import goonImage from "../assets/images/GoonImage.jpg"
 import { useWeb3React } from "@web3-react/core";
 import ClaimComponent from "../components/Claim/ClaimComponent";
 import MintCardComponent from "../components/Cards/MintCard";
@@ -21,20 +22,6 @@ const Home: NextPage = () => {
   const context = useWeb3React();
   const { library } = context;
   const [isended, setisended] = useState(false);
-  const videoRef: any = useRef(null);
-  const attemptPlay = () => {
-    videoRef &&
-      videoRef.current &&
-      videoRef.current.load() &&
-      videoRef.current.play().catch((error: any) => {
-        console.log("error attempting to play", error);
-      });
-  };
-
-  useEffect(() => {
-    videoRef.current.defaultMuted = true;
-    attemptPlay();
-  });
 
   useEffect(() => {
     async function ScrollpositionAnimation() {
@@ -183,10 +170,10 @@ const Home: NextPage = () => {
           {" "}
           <HeaderComponent></HeaderComponent>
         </header>
-        <div className="flex flex-col px-32 mt-32 justify-center w-full h-full">
+        <div className="flex flex-col mt-32 justify-center">
           <Image
             src={goonsHomepage}
-            className="invisible sm:invisible md:invisible lg:invisible xl:visible"
+            className="sm:visible md:visible lg:visible xl:visible "
           >
            </Image>
         </div>
@@ -200,37 +187,37 @@ const Home: NextPage = () => {
             "mx-auto self-center content-center items-center justify-center"
           }
         >
-          <p className={"my-0 sm:my-0 md:my-0 lg:my-0 xl:my-10"}></p>
+          <p className={"my-4 sm:my-4 md:my-6 lg:my-6 xl:my-10"}></p>
          
           <div
             className={"flex flex-row w-screen object-center justify-center"}
           >
             <button
-              style={{ fontFamily: "BeatWord" }}
-              onClick={() => window.open("https://google.com")}
+              style={{ fontFamily: "PaintDrops" }}
+              onClick={() => window.open("")}
               type="button"
-              className="text-gray-100 hover:animate-fadeinleft js-show-on-scroll-left hover:text-black border transition-all duration-600 border-gray-200 hover:bg-teal-600 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-2xl md:text-3xl px-8 py-4 text-center mr-2 mb-2"
+              className="text-gray-800 hover:animate-fadeinleft js-show-on-scroll-left hover:text-black border transition-all duration-600 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-2xl md:text-3xl px-5 py-3 text-center mr-2 mb-2"
             >
               {" "}
               OpenSea
             </button>
             <button
-              style={{ fontFamily: "BeatWord" }}
-              onClick={() => window.open("https://www.givewellinu.com/home")}
+              style={{ fontFamily: "PaintDrops" }}
+              onClick={() => window.open("")}
               type="button"
-              className="text-gray-100 hover:animate-fadeindown js-show-on-scroll-down hover:text-black border transition-all duration-600 border-gray-200 hover:bg-teal-600 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-2xl md:text-3xl px-8 py-4 text-center mr-2 mb-2"
+              className="text-gray-800 hover:animate-fadeindown js-show-on-scroll-down hover:text-black border transition-all duration-600 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-2xl md:text-3xl px-5 py-3 text-center mr-2 mb-2"
             >
               Website
             </button>
             <button
-              style={{ fontFamily: "BeatWord" }}
+              style={{ fontFamily: "PaintDrops" }}
               onClick={() =>
                 window.open(
-                  "https://app.uniswap.org/#/swap?inputCurrency=0x74be64b45d394fa57816c1950e94dbb8d7a7b306&outputCurrency=ETH"
+                  ""
                 )
               }
               type="button"
-              className="text-gray-100 hover:animate-fadeinright js-show-on-scroll-right hover:text-black border transition-all duration-500 border-gray-200 hover:bg-teal-600 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-2xl md:text-3xl px-8 py-4 text-center mr-2 mb-2"
+              className="text-gray-800 hover:animate-fadeinright js-show-on-scroll-right hover:text-black border transition-all duration-600 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-2xl md:text-3xl px-5 py-3 text-center mr-2 mb-2"
             >
               Token
             </button>
@@ -244,29 +231,19 @@ const Home: NextPage = () => {
         <div className={"flex flex-col xl:flex-row mx-auto justify-center px-6 md:px-16 lg:px-24"}>
           <div className={"flex flex-col mx-6 hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft transition-all duration-600"}>
           <div className="video-docker top-0 left-0 h-full justify-center w-full h-full">
-          <video
-            ref={videoRef}
-            className=""
-            playsInline
-            autoPlay
-            loop
-            muted
-          >
-            
-              <source src="/WalkinGoon.mp4" type="video/mp4"/> Your browser does
-            not support the video tag, update your browser
-          </video>
+          <Image className={'hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft '} src={goonImage}>
+          </Image>
         </div>
           </div>
           <div
             className={
-              "flex flex-col border-2 border-teal-200 my-10 lg:my-0 rounded-lg hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft transition-all duration-600 h-fit py-10 w-fit"
+              "flex flex-col border-2 border-red-600 my-10 lg:my-0 self-center rounded-lg hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft transition-all duration-600 h-fit py-10 w-fit"
             }
           >
             <p
-              style={{ fontFamily: "BeatWord" }}
+              style={{ fontFamily: "PaintDrops" }}
               className={
-                "text-3xl lg:text-4xl text-teal-100 text-center self-center mx-auto border-b-4 border-white"
+                "text-3xl lg:text-4xl text-gray-800 text-center self-center mx-auto border-b-4 border-red-400"
               }
             >
               Here's something interesting you should know!
@@ -274,7 +251,7 @@ const Home: NextPage = () => {
             <p
               style={{ fontFamily: "MondayFeelings" }}
               className={
-                "text-xl lg:text-2xl text-teal-100 text-center pt-6 px-4 self-center mx-auto"
+                "text-xl lg:text-2xl text-gray-800 text-center pt-6 px-4 self-center mx-auto"
               }
             >
               Let's talk about how to get engaged in our community
@@ -288,13 +265,12 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        <hr className="my-4 mx-auto w-48 h-1 bg-gray-100 rounded border-0 md:my-10" />
+        <hr className="my-4 mx-auto w-48 h-1 bg-red-500 rounded border-0 md:my-10" />
 
 
       <div className={'justify-center flex flex-col'}>
         <ClaimComponent></ClaimComponent>
       </div>
-      <DropdownComponent></DropdownComponent>
       </main>
       <FooterComponent></FooterComponent>
     </div>
