@@ -58,6 +58,7 @@
     "tiny-invariant": "^1.2.0",
     "tw-elements": "^1.0.0-alpha12",
     "typescript-string-operations": "^1.4.1",
+    "web3": "^1.8.2",
     "web3modal": "^1.9.9",
     "widgets-web3-react/core": "npm:@web3-react/core@8.0.16-alpha.0",
     "widgets-web3-react/eip1193": "npm:@web3-react/eip1193@8.0.16-alpha.0",
