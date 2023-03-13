@@ -21,7 +21,7 @@ import {
   Web3Provider,
 } from "@ethersproject/providers";
 import Link from "next/link";
-import { NFTABIObject } from "../../contracts/abi/NftAbi.mjs";
+import { NFTABIObject } from "../../contracts/NftAbi.mjs";
 import MintCardComponent from "../../components/Cards/MintCard";
 import ClaimComponent from "../../components/Claim/ClaimComponent";
 import { Contract } from "@ethersproject/contracts";
