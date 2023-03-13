@@ -4,7 +4,7 @@ import React from "react";
 //import Image from "next/image";
 import Link from "next/link";
 import Image from "next/image";
-import goonsLogo from "../../assets/images/goonsLogo.jpg"
+import goonsLogo from "../../public/GoonsLogo.jpg"
 import { ConnectWallet } from "../Web3Modal/WalletConnect";
 import { Dropdown } from "flowbite-react";
 export default function HeaderComponent() {
