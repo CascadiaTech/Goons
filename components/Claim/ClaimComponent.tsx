@@ -53,7 +53,7 @@ export default function ClaimComponent() {
         const provider = new Web3Provider(
           library?.provider as ExternalProvider | JsonRpcFetchFunc
         );
-        const contractaddress = "0xFC2C1EdBc2715590667c7c4BE0563010aBC9E205"; // "clienttokenaddress"
+        const contractaddress = "0x57884e3b2174e0238C5231388fE83a0c046549a6"; // "clienttokenaddress"
         const contract = new Contract(contractaddress, abi, provider);
         const balance = await new contract.balanceOf(account); //.claim(account,amount)
         const Claimtxid = await balance;
@@ -116,7 +116,7 @@ export default function ClaimComponent() {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://api.ethplorer.io/getTokenInfo/0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9?apiKey=EK-9PHXj-P2uJWQm-fmJ3A"
+          "https://api.ethplorer.io/getTokenInfo/0x57884e3b2174e0238C5231388fE83a0c046549a6?apiKey=EK-9PHXj-P2uJWQm-fmJ3A"
         );
 
         const data = await response.json();
@@ -142,7 +142,7 @@ export default function ClaimComponent() {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://api.ethplorer.io/getTokenInfo/0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9?apiKey=EK-9PHXj-P2uJWQm-fmJ3A"
+          "https://api.ethplorer.io/getTokenInfo/0x57884e3b2174e0238C5231388fE83a0c046549a6?apiKey=EK-9PHXj-P2uJWQm-fmJ3A"
         );
 
         const data = await response.json();
@@ -168,7 +168,7 @@ export default function ClaimComponent() {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://api.ethplorer.io/getTokenInfo/0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9?apiKey=EK-9PHXj-P2uJWQm-fmJ3A"
+          "https://api.ethplorer.io/getTokenInfo/0x57884e3b2174e0238C5231388fE83a0c046549a6?apiKey=EK-9PHXj-P2uJWQm-fmJ3A"
         );
 
         const data = await response.json();

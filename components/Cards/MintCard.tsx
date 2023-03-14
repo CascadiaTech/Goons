@@ -49,7 +49,7 @@ export default function MintCardComponent() {
           library?.provider as ExternalProvider | JsonRpcFetchFunc
         );
         const NFTabi = NFTABIObject;
-        const contractaddress = "0x584EcD04eD498fD3afbcA7e233927D0D75a5EAe1";
+        const contractaddress = "0x57884e3b2174e0238c5231388fe83a0c046549a6";
         const contract = new Contract(contractaddress, NFTabi, provider);
         const Totalminted = await contract.totalSupply();
         const FinalResult = Number(Totalminted);
@@ -69,7 +69,7 @@ export default function MintCardComponent() {
           library?.provider as ExternalProvider | JsonRpcFetchFunc
         );
         const NFTabi = NFTABIObject;
-        const contractaddress = "0x584EcD04eD498fD3afbcA7e233927D0D75a5EAe1";
+        const contractaddress = "0x57884e3b2174e0238c5231388fe83a0c046549a6";
         const contract = new Contract(contractaddress, NFTabi, provider);
         const Mintprice = await contract.PUB_MINT_PRICE();
         const MintPriceformatted = formatEther(Mintprice);
@@ -91,7 +91,7 @@ export default function MintCardComponent() {
           library?.provider as ExternalProvider | JsonRpcFetchFunc
         );
         const NFTabi = NFTABIObject;
-        const contractaddress = "0x584EcD04eD498fD3afbcA7e233927D0D75a5EAe1";
+        const contractaddress = "0x57884e3b2174e0238c5231388fe83a0c046549a6";
         const contract = new Contract(contractaddress, NFTabi, provider);
         const Mintactive = await contract.pubMintActive();
         setpubmintactive(Mintactive);
@@ -125,7 +125,7 @@ export default function MintCardComponent() {
       setLoading(true);
       const data = NFTABIObject;
       const abi = data;
-      const contractaddress = "0x584EcD04eD498fD3afbcA7e233927D0D75a5EAe1"; // "clienttokenaddress"
+      const contractaddress = "0x57884e3b2174e0238c5231388fe83a0c046549a6"; // "clienttokenaddress"
       const provider = new Web3Provider(
         library?.provider as ExternalProvider | JsonRpcFetchFunc
       );
@@ -212,7 +212,7 @@ export default function MintCardComponent() {
         className="mt-4 text-black text-center text-3xl"
       >
         {" "}
-        Price: {pubmintprice} ETH
+        Price: 0.04 ETH
       </p>
       <p
         style={{ fontFamily: "PaintDrops" }}
