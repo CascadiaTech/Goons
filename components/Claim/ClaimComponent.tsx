@@ -471,7 +471,7 @@ export default function ClaimComponent() {
           style={{ fontFamily: "PaintDrops" }}
           className="text-center mb-2 text-4xl font-bold tracking-tight self-center text-gray-800 dark:text-gray-800"
         >
-          Claim ETH Rewards
+          Claim ETH Rewards < br/> (GENESIZ NFT HOLDERS)
         </h5>
         {loading ? (
           <Spin indicator={antIcon} className="add-spinner" />

@@ -205,7 +205,7 @@ const Home: NextPage = () => {
               style={{ fontFamily: "PaintDrops" }}
               onClick={() => window.open("")}
               type="button"
-              className="text-gray-800  hover:text-black border transition-all duration-600 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-2xl md:text-3xl px-5 py-3 text-center mr-2 mb-2"
+              className="text-gray-800 hover:text-black border transition-all duration-600 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-2xl md:text-3xl px-5 py-3 text-center mr-2 mb-2"
             >
               Website
             </button>
@@ -231,37 +231,8 @@ const Home: NextPage = () => {
         <div className={"flex flex-col xl:flex-row mx-auto justify-center px-6 md:px-16 lg:px-24"}>
           <div className={"flex flex-col mx-6 hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft transition-all duration-600"}>
           <div className="video-docker top-0 left-0 h-full justify-center w-full h-full">
-          <Image className={'hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft '} src={goonImage}>
-          </Image>
+          <Image className={'hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft '} src={goonImage}></Image>
         </div>
-          </div>
-          <div
-            className={
-              "flex flex-col border-2 border-red-600 my-10 lg:my-0 self-center rounded-lg hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft transition-all duration-600 h-fit py-10 w-fit"
-            }
-          >
-            <p
-              style={{ fontFamily: "PaintDrops" }}
-              className={
-                "text-3xl lg:text-4xl text-gray-800 text-center self-center mx-auto border-b-4 border-red-400"
-              }
-            >
-              Here's something interesting you should know!
-            </p>
-            <p
-              style={{ fontFamily: "MondayFeelings" }}
-              className={
-                "text-xl lg:text-2xl text-gray-800 text-center pt-6 px-4 self-center mx-auto"
-              }
-            >
-              Let's talk about how to get engaged in our community
-              <br /> At the GoonSquad community we believe in fairness and
-              equality for the individual <br /> Join the community by
-              purhcasing yourself a unique NFT and you will be rewarded greatly{" "}
-              <br /> We aim to be the most trustworthy, exciting meme token that
-              allows for passive income yield in the form of token USDC
-              reflections.
-            </p>
           </div>
         </div>
 
