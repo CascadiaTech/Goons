@@ -230,7 +230,7 @@ const Home: NextPage = () => {
         >
           <div
             className={
-              "flex flex-col mx-auto px-60 mt-12 w-fit h-fit justify-center hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft"
+              "flex flex-col mx-auto px-12 mt-12 w-fit h-fit justify-center hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft"
             }
           >
             <Image className={""} src={goonImage}></Image>

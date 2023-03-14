@@ -15,13 +15,13 @@ export const ConnectWallet = () => {
   });
   const walletconnect = new WalletConnectConnector({
     supportedChainIds: [1, 3, 4, 5, 42, 11155111],
-    rpc: { 1: `https://mainnet.infura.io/v3/c686522a4d384ef28e376ec0406a424f`, 5: `https://goerli.infura.io/v3/c686522a4d384ef28e376ec0406a424f` },
+    rpc: { 1: `https://mainnet.infura.io/v3/a7b52e948423488e8da7de62e23f3a92`, 5: `https://goerli.infura.io/v3/a7b52e948423488e8da7de62e23f3a92` },
     bridge: "https://bridge.walletconnect.org",
     qrcode: true,  
   });
 
   const CoinbaseWallet = new WalletLinkConnector({
-    url: `https://mainnet.infura.io/v3/c686522a4d384ef28e376ec0406a424f`,
+    url: `https://mainnet.infura.io/v3/a7b52e948423488e8da7de62e23f3a92`,
     appName: "Web3",
     supportedChainIds: [1, 3, 4, 5, 42, 11155111],
   });
