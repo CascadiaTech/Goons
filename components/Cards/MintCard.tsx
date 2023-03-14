@@ -182,7 +182,10 @@ export default function MintCardComponent() {
           </button>
         </>
       )}{" "}
-      <div style={{ fontFamily: "PaintDrops" }} className="text-black mb-2 text-2xl">
+      <div
+        style={{ fontFamily: "PaintDrops" }}
+        className="text-black mb-2 text-2xl"
+      >
         {quantity} NFT's
       </div>
       <label
@@ -219,30 +222,34 @@ export default function MintCardComponent() {
         Total Amount of NFT's Sold: <br /> {totalSupply} NFT's
       </p>
       <p className={"my-10"}></p>
+      <h5
+        style={{ fontFamily: "PaintDrops" }}
+        className="text-center mb-2 text-4xl font-bold tracking-tight self-center text-gray-800 dark:text-gray-800"
+      >
+        Claim NFT ETH Rewards
+      </h5>
+      {loading ? (
+        <Spin indicator={antIcon} className="add-spinner" />
+      ) : (
+        <>
+          <div className="flex flex-row content-center items-center max-w-screen">
+            <p
+              style={{ fontFamily: "PaintDrops" }}
+              className="w-fit mx-0 px-20 md:px-32 self-center content-center tn:mx-0 elevation-10 hover:elevation-50 md:mx-24 h-24
+         clip-path-mycorners justify-self-center mt-10 text-gray-800 bg-red-600
+         text-3xl lg:text-4xl "
+            >
+              Claim
+            </p>
+          </div>
+        </>
+      )}
+      <h5
+        style={{ fontFamily: "PaintDrops" }}
+        className="text-center mb-2 text-3xl font-bold tracking-tight self-center text-gray-800 dark:text-gray-800"
+      >
+        Coming Soon!
+      </h5>
     </div>
   );
 }
-
-//<h5
-//style={{ fontFamily: "MondayFeelings" }}
-//className="text-center mb-2 text-3xl font-bold tracking-tight self-center text-gray-800 dark:text-gray-800"
-//>
-//Claim ETH Rewards
-//</h5>
-//{loading ? (
-//<Spin indicator={antIcon} className="add-spinner" />
-//) : (
-//<>
-//  <div className="flex flex-row content-center items-center max-w-screen">
-//    <button
-//      style={{ fontFamily: "PaintDrops" }}
-//      type="button"
-//      className="w-fit mx-0 px-20 md:px-32 self-center content-center tn:mx-0 elevation-10 hover:elevation-50 md:mx-24 h-24
-//         clip-path-mycorners justify-self-center mt-10 text-gray-800 bg-red-600 hover:bg-red-400 transition ease-in-out duration-700
-//         text-3xl lg:text-4xl "
-//    >
-//      Claim
-//    </button>
-//  </div>
-//</>
-//)}
