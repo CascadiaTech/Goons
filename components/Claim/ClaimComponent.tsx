@@ -330,7 +330,7 @@ export default function ClaimComponent() {
     if (!account) {
       Swal.fire({
         icon: "error",
-        title: "Connect Your Wallet To Mint, and Enter A Mint Quantity",
+        title: "Connect Your Wallet To Claim",
         timer: 5000,
       });
     }

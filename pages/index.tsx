@@ -231,9 +231,11 @@ const Home: NextPage = () => {
         <div className={"flex flex-col xl:flex-row mx-auto justify-center px-6 md:px-16 lg:px-24"}>
           <div className={"flex flex-col mx-6 hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft transition-all duration-600"}>
           <div className="video-docker top-0 left-0 h-full justify-center w-full h-full">
-          <Image className={'hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft '} src={goonImage}></Image>
+          <Image className={'w-1/2 h-1/2 hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft '} src={goonImage}>
+          </Image>
         </div>
-          </div>
+          </div> 
+
         </div>
 
         <hr className="my-4 mx-auto w-48 h-1 bg-red-500 rounded border-0 md:my-10" />
