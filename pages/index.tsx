@@ -9,9 +9,9 @@ import DualCardComponent from "../components/DualCards/DualCardComponent";
 import ScrollpositionAnimation from "../hooks/OnScroll";
 import { useEffect, useRef, useState } from "react";
 import "@uniswap/widgets/fonts.css";
-import goonsHomepage from "../assets/images/GoonsHomepage.jpg"
+import goonsHomepage from "../assets/images/GoonsHomepage.jpg";
 import goonsLogoMobile from "../assets/images/goonsLogoMobile.jpg";
-import goonImage from "../assets/images/GoonImage.jpg"
+import goonImage from "../assets/images/GoonImage.jpg";
 import { useWeb3React } from "@web3-react/core";
 import ClaimComponent from "../components/Claim/ClaimComponent";
 import MintCardComponent from "../components/Cards/MintCard";
@@ -121,7 +121,9 @@ const Home: NextPage = () => {
       //ScrollpositionAnimation();
     }
     async function scrollpositionAnimationscaleintopleft() {
-      const targets = document.querySelectorAll(".js-show-on-scroll-scaleintopleft");
+      const targets = document.querySelectorAll(
+        ".js-show-on-scroll-scaleintopleft"
+      );
       const observer = new IntersectionObserver(function (entries) {
         entries.forEach((entry) => {
           // Is the element in the viewport?
@@ -144,7 +146,7 @@ const Home: NextPage = () => {
       });
       //ScrollpositionAnimation();
     }
-    scrollpositionAnimationscaleintopleft()
+    scrollpositionAnimationscaleintopleft();
     scrollpositionAnimationleft();
     scrollpositionAnimationright();
     scrollpositionAnimationdown();
@@ -155,13 +157,13 @@ const Home: NextPage = () => {
   function RenderButtons() {
     setisended(true);
   }
-  
- // <div className={"mb-10 sm:mb-10 md:mb-10 lg:mb-10 xl:mb-0 flex flex-col"}>
- // <Image
- //   className="min-w-0 min-h-0 visible sm:visible md:visible lg:visible xl:min-w-0 xl:min-h-0 xl:invisible"
- //   src={goonsLogoMobile}
- // ></Image>
- // </div>
+
+  // <div className={"mb-10 sm:mb-10 md:mb-10 lg:mb-10 xl:mb-0 flex flex-col"}>
+  // <Image
+  //   className="min-w-0 min-h-0 visible sm:visible md:visible lg:visible xl:min-w-0 xl:min-h-0 xl:invisible"
+  //   src={goonsLogoMobile}
+  // ></Image>
+  // </div>
 
   return (
     <div className="scroll-smooth">
@@ -174,8 +176,7 @@ const Home: NextPage = () => {
           <Image
             src={goonsHomepage}
             className="sm:visible md:visible lg:visible xl:visible "
-          >
-           </Image>
+          ></Image>
         </div>
         <div
           style={{
@@ -188,7 +189,7 @@ const Home: NextPage = () => {
           }
         >
           <p className={"my-4 sm:my-4 md:my-6 lg:my-6 xl:my-10"}></p>
-         
+
           <div
             className={"flex flex-row w-screen object-center justify-center"}
           >
@@ -211,39 +212,36 @@ const Home: NextPage = () => {
             </button>
             <button
               style={{ fontFamily: "PaintDrops" }}
-              onClick={() =>
-                window.open(
-                  ""
-                )
-              }
+              onClick={() => window.open("")}
               type="button"
               className="text-gray-800 hover:text-black border transition-all duration-600 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-2xl md:text-3xl px-5 py-3 text-center mr-2 mb-2"
             >
               Token
             </button>
-           
           </div>
         </div>
 
-        
         <p className={"my-10"}></p>
 
-        <div className={"flex flex-col xl:flex-row mx-auto justify-center px-6 md:px-16 lg:px-24"}>
-          <div className={"flex flex-col mx-6 hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft transition-all duration-600"}>
-          <div className="video-docker top-0 left-0 h-full justify-center w-full h-full">
-          <Image className={'w-1/2 h-1/2 hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft '} src={goonImage}>
-          </Image>
-        </div>
-          </div> 
-
+        <div
+          className={
+            "flex flex-col xl:flex-row mx-auto justify-center px-6 md:px-16 lg:px-24"
+          }
+        >
+          <div
+            className={
+              "flex flex-col mx-auto px-60 mt-12 w-fit h-fit justify-center hover:animate-scaleintopleft js-show-on-scroll-scaleintopleft"
+            }
+          >
+            <Image className={""} src={goonImage}></Image>
+          </div>
         </div>
 
         <hr className="my-4 mx-auto w-48 h-1 bg-red-500 rounded border-0 md:my-10" />
 
-
-      <div className={'justify-center flex flex-col'}>
-        <ClaimComponent></ClaimComponent>
-      </div>
+        <div className={"justify-center flex flex-col"}>
+          <ClaimComponent></ClaimComponent>
+        </div>
       </main>
       <FooterComponent></FooterComponent>
     </div>
