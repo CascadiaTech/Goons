@@ -8,7 +8,7 @@ import styles from "../../styles/Home.module.css";
 import Image from "next/image";
 import HeaderComponent from "../../components/Header/HeaderComponent";
 import FooterComponent from "../../components/Footer/FooterComponent";
-import goonsPic from "../../assets/images/goonsPic.jpg";
+import goonsPic from "../../public/GoonsLogo.jpg";
 import goonsPicMobile from "../../assets/images/goonsPicMobile.jpg";
 import { Accordion } from "flowbite-react";
 //import Rex_logo from '../../assets/images/REX_logo.png'
@@ -143,10 +143,10 @@ const NFTMint = () => {
     <>
       <HeaderComponent></HeaderComponent>
       <main className={styles.main}>
-        <div className="flex flex-col">
-          <div className={'flex flex-col mt-12 justify-center'}>
+        <div className="justify-center">
+          <div className={'flex flex-col mx-auto px-12 mt-12 w-fit h-fit justify-center'}>
           <Image
-            className="flex flex-col px-2 mt-32 justify-center h-96 w-96 md:w-full md:h-full"
+            className="px-2 mt-32 justify-center"
             src={goonsPic}
           ></Image>
           </div>

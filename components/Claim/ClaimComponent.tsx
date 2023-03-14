@@ -430,7 +430,7 @@ export default function ClaimComponent() {
             }
           >
             <p className={"text-xl font-bold text-gray-800"}>
-              Pending Reflections:
+              Pending ETH Rewards:
             </p>
           </div>
           <div
@@ -446,7 +446,7 @@ export default function ClaimComponent() {
             }
           >
             <p className={"text-xl font-bold text-gray-800"}>
-              Total Reflections Distributed
+              Total ETH Distributed
             </p>
           </div>
           <div className={"rounded-xl text-black text-xl px-4 py-2 m-3"}>
@@ -459,7 +459,7 @@ export default function ClaimComponent() {
             <p className={"text-xl text-gray-800"}>{marketCap} USD</p>
           </div>
           <div className={"rounded-xl text-black text-xl px-4 py-2 m-3"}>
-            <p className={"text-xl font-bold text-gray-800"}>HODLER's:</p>
+            <p className={"text-xl font-bold text-gray-800"}>Holders:</p>
           </div>
           <div className={"rounded-xl text-black text-xl px-4 py-2 m-3"}>
             <p className={"text-xl text-gray-800"}>{holdersCount}</p>

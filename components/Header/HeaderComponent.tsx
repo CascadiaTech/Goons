@@ -47,7 +47,7 @@ export default function HeaderComponent() {
               <Dropdown.Item>
                 <a 
                   onClick={() =>
-                    window.open("https://www.givewellinu.com/home")
+                    window.open("https://www.goonzproject.com/")
                   }>
                   <p
                     className="cursor-pointer block py-2 pr-4 pl-3 text-black rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
@@ -72,7 +72,7 @@ export default function HeaderComponent() {
                 <button
                   type="button"
                   onClick={() =>
-                    window.open("https://www.givewellinu.com/home")
+                    window.open("https://www.goonzproject.com/")
                   }
                   className="text-white bg-red-600 hover:bg-red-400 focus:ring-4 focus:ring-blue-300 font-medium mt-2 rounded-lg text-md px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 >

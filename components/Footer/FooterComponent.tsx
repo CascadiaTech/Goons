@@ -63,44 +63,15 @@ export default function FooterComponent() {
               </h2>
               <ul className="text-gray-600 dark:text-gray-400">
                 <li className="mb-4">
-                  <a href="/" className="hover:underline">
-                    Goonz. 
+                  <a href="https://linktr.ee/goonzproject" className="hover:underline">
+                    Link Tree 
                     <br/>
                     
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://medium.com/@givewellinu"
-                    className="hover:underline"
-                  >
-                    Documents
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                Follow us
-              </h2>
-              <ul className="text-gray-600 dark:text-gray-400">
-                <li className="mb-4">
-                  <a
-                    href="https://t.me/GiveWellInu"
-                    className="hover:underline "
-                  >
-                    Telegram
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://app.uniswap.org/#/swap?inputCurrency=0x74be64b45d394fa57816c1950e94dbb8d7a7b306&outputCurrency=ETH"
-                    className="hover:underline"
-                  >
-                    Uniswap
-                  </a>
-                </li>
-              </ul>
             </div>
             <div>
               <ul className="text-gray-600 dark:text-gray-400">
@@ -137,7 +108,7 @@ export default function FooterComponent() {
               <span className="sr-only"></span>
             </a>
             <a
-              href="https://twitter.com/GiveWell_Inu"
+              href=""
               className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
             >
               <svg
@@ -151,7 +122,7 @@ export default function FooterComponent() {
               <span className="sr-only">Twitter page</span>
             </a>
             <a
-              href="https://github.com/CascadiaTech/GiveWellInu"
+              href=""
               className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
             >
               <svg

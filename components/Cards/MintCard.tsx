@@ -161,7 +161,7 @@ export default function MintCardComponent() {
         style={{ fontFamily: "PaintDrops" }}
         className="text-center mt-12 text-4xl lg:text-5xl mb:mb-2 font-bold tracking-tight text-red-600 dark:text-white"
       >
-        Goonz Squad NFT Collection
+        Goonz Genesiz Series
       </h5>
       {loading ? (
         <div className="content-center items-center">
@@ -182,7 +182,7 @@ export default function MintCardComponent() {
           </button>
         </>
       )}{" "}
-      <div style={{ fontFamily: "Aquire" }} className="text-black mb-2">
+      <div style={{ fontFamily: "PaintDrops" }} className="text-black mb-2 text-2xl">
         {quantity} NFT's
       </div>
       <label
