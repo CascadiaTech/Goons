@@ -12,7 +12,7 @@ export default function HeaderComponent() {
 
   return (
     <div>
-      <nav className="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-black dark:border-gray-600">
+       <nav className="bg-white px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 border-b border-gray-800">
         <div className="container flex flex-nowrap justify-left items-center mx-auto">
           <div></div>
           <div className="md:order-2">
@@ -71,8 +71,7 @@ export default function HeaderComponent() {
             <li>
                 <button
                   type="button"
-                  onClick={() =>
-                    window.open("https://www.goonzproject.com/")
+                  onClick={() => ""
                   }
                   className="text-white bg-red-600 hover:bg-red-400 focus:ring-4 focus:ring-blue-300 font-medium mt-2 rounded-lg text-md px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 >

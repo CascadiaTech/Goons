@@ -196,7 +196,7 @@ const Home: NextPage = () => {
               style={{ fontFamily: "PaintDrops" }}
               onClick={() => window.open("")}
               type="button"
-              className="text-gray-800 hover:animate-fadeinleft js-show-on-scroll-left hover:text-black border transition-all duration-600 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-2xl md:text-3xl px-5 py-3 text-center mr-2 mb-2"
+              className="text-gray-800 hover:text-black border transition-all duration-600 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-2xl md:text-3xl px-5 py-3 text-center mr-2 mb-2"
             >
               {" "}
               OpenSea
@@ -205,7 +205,7 @@ const Home: NextPage = () => {
               style={{ fontFamily: "PaintDrops" }}
               onClick={() => window.open("")}
               type="button"
-              className="text-gray-800 hover:animate-fadeindown js-show-on-scroll-down hover:text-black border transition-all duration-600 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-2xl md:text-3xl px-5 py-3 text-center mr-2 mb-2"
+              className="text-gray-800  hover:text-black border transition-all duration-600 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-2xl md:text-3xl px-5 py-3 text-center mr-2 mb-2"
             >
               Website
             </button>
@@ -217,7 +217,7 @@ const Home: NextPage = () => {
                 )
               }
               type="button"
-              className="text-gray-800 hover:animate-fadeinright js-show-on-scroll-right hover:text-black border transition-all duration-600 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-2xl md:text-3xl px-5 py-3 text-center mr-2 mb-2"
+              className="text-gray-800 hover:text-black border transition-all duration-600 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-2xl md:text-3xl px-5 py-3 text-center mr-2 mb-2"
             >
               Token
             </button>
